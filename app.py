@@ -1,6 +1,5 @@
 import streamlit as st
 from datetime import date
-import streamlit as st
 import ee
 from google.oauth2 import service_account
 import geemap.foliumap as geemap
@@ -26,12 +25,6 @@ markdown = """
 4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
 
 """
-
-import streamlit as st
-import ee
-from google.oauth2 import service_account
-import geemap.foliumap as geemap
-
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
 
