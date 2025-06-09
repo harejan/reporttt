@@ -23,7 +23,7 @@ credentials = service_account.Credentials.from_service_account_info(
 # 初始化 GEE
 ee.Initialize(credentials)
 ###############################################
-st.header("🚩💅🙄研究範圍")
+st.header("🚩研究範圍")
 # 地理區域
 my_Map = geemap.Map()# If we have not defined any box region on the canvas,# If we have not defined any box region on the canvas,
 roi = ee.Geometry.BBox(120.271797, 22.587659, 120.322437, 22.628386)
