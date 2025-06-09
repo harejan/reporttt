@@ -12,8 +12,7 @@ st.header("😺亞灣區簡介")
 st.markdown("亞灣區全名為亞洲新灣區，位於高雄市，範圍橫跨高雄市前鎮區、苓雅區、鹽埕區、鼓山區")
 
 st.header("🗺️亞灣區範圍")
-st.markdown("圖片來源：房感不動科技")
-st.image("DMS11029_1.png", caption="亞灣區範圍", use_column_width=True)
+st.image("DMS11029_1.png", caption="圖片來源：房感不動科技", use_container_width=True)
 
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
