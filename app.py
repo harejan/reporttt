@@ -71,11 +71,11 @@ col1, col2 = st.columns(2)
 # 左邊欄放第一張 GIF
 with col1:
     st.header("2016 ~ 2020")
-    st.image('images/timelapse2016-2020.gif')
+    st.image('timelapse2016-2020.gif')
 
 # 右邊欄放第二張 GIF
 with col2:
     st.header("2021 ~ 2024")
-    st.image('images/timelapse2021-2024.gif')
+    st.image('timelapse2021-2024.gif')
 
     
