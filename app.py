@@ -32,6 +32,7 @@ my_Map.centerObject(roi, 14)
 my_Map.to_streamlit(height=600)
 
 st.header("🌏2017~2024年衛星影像Split Map")
+st.markdown("波段組成：B11、B8、B3")
 my_img2017 = (
     ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
     .filterBounds(roi)
