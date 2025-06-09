@@ -62,7 +62,7 @@ my_Map.centerObject(my_img2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
 my_Map.to_streamlit(height=600)
 
-st.title("利用擴充器示範")
+st.title("2016~2024timelapse")
 
 with st.expander("展示gif檔"):
     st.image("pucallpa.gif")
