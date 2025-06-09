@@ -1,1 +1,5 @@
-st.image("C:\Users\USER\Downloads\timelapse2016-2020.gif")
+import streamlit as st
+
+st.title("2016-2020timelapse")
+
+st.image('images/timelapse2016-2020.gif', caption='2016-2020 Timelapse', use_column_width=True)
