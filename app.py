@@ -39,15 +39,16 @@ ee.Initialize(credentials)
 
 
 ###############################################
-st.markdown(markdown)
-st.title("🌏2017~2024年衛星影像Split Map")
-
+st.header("🚩研究範圍")
 # 地理區域
 my_Map = geemap.Map()# If we have not defined any box region on the canvas,# If we have not defined any box region on the canvas,
 roi = ee.Geometry.BBox(120.271797, 22.587659, 120.322437, 22.628386)
 my_Map.addLayer(roi)
 my_Map.centerObject(roi, 14)
+my_Map.to_streamlit(height=600)
 
+st.markdown(markdown)
+st.title("🌏2017~2024年衛星影像Split Map")
 my_img2017 = (
     ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
     .filterBounds(roi)
