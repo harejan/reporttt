@@ -65,6 +65,6 @@ my_Map.to_streamlit(height=600)
 st.title("2016~2024timelapse")
 
 with st.expander("展示gif檔"):
-    st.image(Asia New Bay Area2016.gif)
+    st.image('Asia New Bay Area2016.gif')
 
     
