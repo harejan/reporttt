@@ -9,7 +9,7 @@ st.set_page_config(layout="wide", page_title="這是Streamlit App第二次練習
 
 st.title("亞灣區的發展與變遷🌊")
 st.header("🚩亞灣區簡介")
-st.markdown("普通文字")
+st.markdown("亞灣區全名為亞洲新灣區，位於高雄市，範圍橫跨高雄市前鎮區、苓雅區、鹽埕區、鼓山區")
 
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
