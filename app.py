@@ -8,9 +8,6 @@ import geemap.foliumap as geemap
 st.set_page_config(layout="wide", page_title="這是Streamlit App第二次練習！")
 
 st.title("亞灣區的發展與變遷🌊")
-
-
-
 st.header("🚩亞灣區簡介")
 st.markdown("普通文字")
 
@@ -25,10 +22,8 @@ credentials = service_account.Credentials.from_service_account_info(
 
 # 初始化 GEE
 ee.Initialize(credentials)
-
-
 ###############################################
-st.header("🚩研究範圍")
+st.header("🚩💅🙄研究範圍")
 # 地理區域
 my_Map = geemap.Map()# If we have not defined any box region on the canvas,# If we have not defined any box region on the canvas,
 roi = ee.Geometry.BBox(120.271797, 22.587659, 120.322437, 22.628386)
@@ -67,14 +62,9 @@ my_Map.centerObject(my_img2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
 my_Map.to_streamlit(height=600)
 
-st.markdown(markdown)
 st.title("利用擴充器示範")
 
 with st.expander("展示gif檔"):
     st.image("pucallpa.gif")
 
-with st.expander("播放mp4檔"):
-    video_file = open("pucallpa.mp4", "rb")  # "rb"指的是讀取二進位檔案（圖片、影片）
-    video_bytes = video_file.read()
-    st.video(video_bytes)
     
