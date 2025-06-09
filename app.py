@@ -76,7 +76,6 @@ right_layer = geemap.ee_tile_layer(my_img2024, vis_params, '2024年')
 
 my_Map.centerObject(my_img2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
-my_Map
 my_Map.to_streamlit(height=600)
 
 st.markdown(markdown)
