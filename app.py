@@ -37,7 +37,7 @@ import geemap
 my_Map = geemap.Map()
 my_Map.add_shp(in_shp, layer_name='asia bay')
 my_Map.setCenter(120.300058, 22.604772, 14)
-my_Map
+my_Map.to_streamlit(height=600)
 
 st.header("🚩研究範圍")
 # 地理區域
