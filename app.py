@@ -9,22 +9,11 @@ st.set_page_config(layout="wide", page_title="這是Streamlit App第二次練習
 
 st.title("亞灣區的發展與變遷🌊")
 
-st.markdown(
-    """
-    This multipage app template demonstrates various interactive web apps created using [streamlit](https://streamlit.io), [GEE](https://earthengine.google.com/), 
-    [geemap](https://leafmap.org) and [leafmap](https://leafmap.org). 
-    """
-)
 
-st.header("亞灣區簡介")
 
-markdown = """
-1. You can use it as a template for your own project.
-2. Customize the sidebar by changing the sidebar text and logo in each Python file.
-3. Find your favorite emoji from https://emojipedia.org.
-4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
+st.header("🚩亞灣區簡介")
+st.markdown("普通文字")
 
-"""
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
 
@@ -39,6 +28,17 @@ ee.Initialize(credentials)
 
 
 ###############################################
+st.header("🗺️亞灣區範圍")
+!pip install PyCRS
+
+in_shp = '/content/drive/MyDrive/數位地球與環境變遷/亞灣區/亞灣區.shp'
+
+import geemap
+my_Map = geemap.Map()
+my_Map.add_shp(in_shp, layer_name='asia bay')
+my_Map.setCenter(120.300058, 22.604772, 14)
+my_Map
+
 st.header("🚩研究範圍")
 # 地理區域
 my_Map = geemap.Map()# If we have not defined any box region on the canvas,# If we have not defined any box region on the canvas,
