@@ -28,23 +28,6 @@ ee.Initialize(credentials)
 
 
 ###############################################
-st.header("🗺️亞灣區範圍")
-import json
-st.set_page_config(layout="wide", page_title="📍 亞灣區發展地圖 App")
-# --- 建立地圖 ---
-my_Map = geemap.Map()
-# --- 讀取固定的亞灣區範圍 GeoJSON ---
-geojson_path = 'data/亞灣區.geojson'
-
-with open(geojson_path, "r", encoding="utf-8") as f:
-    geojson_obj = json.load(f)
-
-my_Map.add_geojson(geojson_obj, layer_name='亞灣區範圍')
-my_Map.setCenter(120.300058, 22.604772, 14)
-
-
-# --- 顯示地圖 ---
-my_Map.to_streamlit(height=600)
 st.header("🚩研究範圍")
 # 地理區域
 my_Map = geemap.Map()# If we have not defined any box region on the canvas,# If we have not defined any box region on the canvas,
