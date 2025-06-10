@@ -41,7 +41,7 @@ def addNDVI(image):
 
 s2 = ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
 
-filtered20117 = (s2
+filtered2017 = (s2
     .filter(ee.Filter.date('2017-01-01', '2017-12-31'))
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
     .filter(ee.Filter.bounds(roi))
