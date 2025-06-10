@@ -5,7 +5,7 @@ from google.oauth2 import service_account
 import geemap.foliumap as geemap
 
 
-st.set_page_config(layout="wide", page_title="這是Streamlit App第二次練習！")
+st.set_page_config(layout="wide", page_title="數位地球與環境變遷期末報告_s1243006洪子晴")
 
 st.title("亞灣區的發展與變遷🌊")
 
