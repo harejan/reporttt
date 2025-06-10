@@ -4,7 +4,7 @@ import ee
 from google.oauth2 import service_account
 import geemap.foliumap as geemap
 
-st.title("🌳2010~2024年NDVI變化")
+st.title("🌳2010、2024年NDVI變化")
 st.header("🛰️Landsat")
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
@@ -85,7 +85,7 @@ my_Map.to_streamlit(height=600)
 
 st.header("📊NDVI比較")
 st.subheader("2024年的NDVI指數-2010年的NDVI指數")
-st.subheader("🟥植生減少 🟩植生減少 ⬜不變" )
+st.subheader("🟥植生減少 🟩植生增加 ⬜不變" )
 
 ndvi_diff = median2024.select('NDVI').subtract(median2010.select('NDVI'))
 
