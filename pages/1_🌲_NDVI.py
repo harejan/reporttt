@@ -91,8 +91,9 @@ legend_dict = {
 
 my_Map = geemap.Map()
 left_layer = geemap.ee_tile_layer(median2017, ndvi_vis, '2017年')
-right_layer = geemap.ee_tile_layer(median2024, vis_params, '2024年')
+right_layer = geemap.ee_tile_layer(median2024, ndvi_vis, '2024年')
 
-my_Map.centerObject(my_img2017.geometry(), 14)
+my_Map.centerObject(median2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
+my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
 my_Map.to_streamlit(height=600)
