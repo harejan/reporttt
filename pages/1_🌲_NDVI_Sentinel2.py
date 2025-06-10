@@ -132,3 +132,44 @@ my_Map.add_legend(title='NDVI Difference', legend_dict={
 })
 my_Map.addLayer(ndvi_diff, diff_vis, 'NDVI Difference (2024 - 2017)')
 my_Map.to_streamlit(height=600)
+
+   # 定義 classify_ndvi_diff 函數
+def classify_ndvi_diff(image):
+    # 紅色區域 mask：差異 < -0.1
+    red = image.lt(-0.1).rename('red')
+    # 綠色區域 mask：差異 > 0.1
+    green = image.gt(0.1).rename('green')
+    # 中性區域 mask：-0.1 <= 差異 <= 0.1
+    neutral = image.gte(-0.1).And(image.lte(0.1)).rename('neutral')
+
+    # 回傳原圖加上三個 mask band
+    return image.addBands(red).addBands(green).addBands(neutral)
+
+# 執行分類
+ndvi_diff_classified = classify_ndvi_diff(ndvi_diff)
+
+# 計算分類區域的統計數據
+stats = ndvi_diff_classified.reduceRegion(
+    reducer = ee.Reducer.sum(),
+    geometry = roi,
+    scale = 10,  # Sentinel-2 解像度 10m
+    maxPixels = 1e9
+)
+
+# 取得各區域的像素數
+red_count = stats.get('red').getInfo()
+green_count = stats.get('green').getInfo()
+neutral_count = stats.get('neutral').getInfo()
+
+# 計算總像素數
+total_count = red_count + green_count + neutral_count
+
+# 計算比例
+red_ratio = red_count / total_count
+green_ratio = green_count / total_count
+neutral_ratio = neutral_count / total_count
+
+# 輸出結果
+print(f"紅色區域比例: {red_ratio:.2%}")
+print(f"綠色區域比例: {green_ratio:.2%}")
+print(f"中性區域比例: {neutral_ratio:.2%}")
