@@ -58,10 +58,41 @@ legend_dict = {
     '0.6 ~ 1': '#006400'
 }
 
+s2 = ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
+
+filtered = (s2
+    .filter(ee.Filter.date('2024-01-01', '2024-12-31'))
+    .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
+    .filter(ee.Filter.bounds(roi))
+    .map(maskS2clouds)
+    .map(addNDVI)
+)
+
+median2024 = filtered.median().clip(roi)
+
+ndvi_vis = {
+    'min': -0.5,
+    'max': 1.0,
+    'palette': ['#640000',  # very low NDVI
+          '#ff0000',  # low NDVI
+          '#ffff00',  # medium NDVI
+          '#00c800',  # high NDVI
+          '#006400']   # very high NDVI
+}
+legend_dict = {
+    '-1 ~ -0.6': '#640000',
+    '-0.6 ~ -0.2': '#ff0000',
+    '-0.2 ~ 0.2': '#ffff00',
+    '0.2 ~ 0.6': '#00c800',
+    '0.6 ~ 1': '#006400'
+}
+
 
 
 my_Map = geemap.Map()
-my_Map.centerObject(roi, 14)
-my_Map.addLayer(median2017.select('NDVI'), ndvi_vis, 'NDVI2017')
-my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
-my_Map
+left_layer = geemap.ee_tile_layer(median2017, ndvi_vis, '2017年')
+right_layer = geemap.ee_tile_layer(median2024, vis_params, '2024年')
+
+my_Map.centerObject(my_img2017.geometry(), 14)
+my_Map.split_map(left_layer, right_layer)
+my_Map.to_streamlit(height=600)
