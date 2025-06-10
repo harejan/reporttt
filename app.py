@@ -8,8 +8,6 @@ import geemap.foliumap as geemap
 st.set_page_config(layout="wide", page_title="這是Streamlit App第二次練習！")
 
 st.title("亞灣區的發展與變遷🌊")
-st.header("😺亞灣區簡介")
-st.markdown("亞灣區全名為亞洲新灣區，位於高雄市，範圍橫跨高雄市前鎮區、苓雅區、鹽埕區、鼓山區")
 
 st.header("🗺️亞灣區範圍")
 st.image("DMS11029_1.png", caption="圖片來源：房感不動科技", use_container_width=True)
