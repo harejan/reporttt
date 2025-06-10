@@ -156,20 +156,17 @@ stats = ndvi_diff_classified.reduceRegion(
     maxPixels = 1e9
 )
 
-# 取得各區域的像素數
 red_count = stats.get('red').getInfo()
 green_count = stats.get('green').getInfo()
 neutral_count = stats.get('neutral').getInfo()
 
-# 計算總像素數
 total_count = red_count + green_count + neutral_count
 
-# 計算比例
 red_ratio = red_count / total_count
 green_ratio = green_count / total_count
 neutral_ratio = neutral_count / total_count
 
-# 輸出結果
-print(f"紅色區域比例: {red_ratio:.2%}")
-print(f"綠色區域比例: {green_ratio:.2%}")
-print(f"中性區域比例: {neutral_ratio:.2%}")
+st.subheader("NDVI 差異區域比例統計")
+st.write(f"🔴 **紅色區域比例:** {red_ratio:.2%}")
+st.write(f"🟢 **綠色區域比例:** {green_ratio:.2%}")
+st.write(f"⚪ **中性區域比例:** {neutral_ratio:.2%}")
