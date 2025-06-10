@@ -41,7 +41,7 @@ def addNDVI(image):
 
 s2 = ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
 
-filtered = (s2
+filtered20117 = (s2
     .filter(ee.Filter.date('2017-01-01', '2017-12-31'))
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
     .filter(ee.Filter.bounds(roi))
@@ -49,7 +49,7 @@ filtered = (s2
     .map(addNDVI)
 )
 
-median2017 = filtered.median().clip(roi)
+median2017 = filtered2017.median().clip(roi)
 
 
 ndvi_vis = {
@@ -72,7 +72,7 @@ legend_dict = {
 
 s2 = ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
 
-filtered = (s2
+filtered2024 = (s2
     .filter(ee.Filter.date('2024-01-01', '2024-12-31'))
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
     .filter(ee.Filter.bounds(roi))
@@ -80,7 +80,7 @@ filtered = (s2
     .map(addNDVI)
 )
 
-median2024 = filtered.median().clip(roi)
+median2024 = filtered2024.median().clip(roi)
 
 ndvi_vis = {
     'min': -0.5,
@@ -102,8 +102,8 @@ legend_dict = {
 
 
 my_Map = geemap.Map()
-left_layer = geemap.ee_tile_layer(median2017, ndvi_vis, '2017年')
-right_layer = geemap.ee_tile_layer(median2024, ndvi_vis, '2024年')
+left_layer = geemap.ee_tile_layer(median2017.select('NDVI', ndvi_vis, '2017年')
+right_layer = geemap.ee_tile_layer(median2024.select('NDVI', ndvi_vis, '2024年')
 
 my_Map.centerObject(median2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
