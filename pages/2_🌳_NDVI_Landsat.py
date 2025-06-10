@@ -105,3 +105,49 @@ my_Map.add_legend(title='NDVI Difference', legend_dict={
     '0.2 ~ 0.5': 'green'
 })
 my_Map.to_streamlit(height=600)
+
+# 定義 Landsat NDVI 差異分類函數
+def classify_ndvi_diff(image):
+    # 紅色區域 mask：差異 < -0.1
+    red = image.lt(-0.1).rename('red')
+    # 綠色區域 mask：差異 > 0.1
+    green = image.gt(0.1).rename('green')
+    # 中性區域 mask：-0.1 <= 差異 <= 0.1
+    neutral = image.gte(-0.1).And(image.lte(0.1)).rename('neutral')
+
+    # 回傳原圖加上三個 mask band
+    return image.addBands(red).addBands(green).addBands(neutral)
+
+# 假設你已經有 median2009, median2024 (NDVI band 名為 'NDVI')
+# 計算 NDVI 差異圖
+ndvi_diff = median2024.select('NDVI').subtract(median2009.select('NDVI'))
+
+# 執行分類
+ndvi_diff_classified = classify_ndvi_diff(ndvi_diff)
+
+# 計算分類區域的統計數據
+stats = ndvi_diff_classified.reduceRegion(
+    reducer = ee.Reducer.sum(),
+    geometry = roi,
+    scale = 30,  # Landsat 解像度 30m
+    maxPixels = 1e9
+)
+
+# 取得各區域的像素數
+red_count = stats.get('red').getInfo()
+green_count = stats.get('green').getInfo()
+neutral_count = stats.get('neutral').getInfo()
+
+# 計算總像素數
+total_count = red_count + green_count + neutral_count
+
+# 計算比例
+red_ratio = red_count / total_count
+green_ratio = green_count / total_count
+neutral_ratio = neutral_count / total_count
+
+# 在 Streamlit 中顯示結果
+st.subheader("NDVI 差異區域比例統計 (2009 → 2024, Landsat)")
+st.write(f"🔴 **紅色區域比例:** {red_ratio:.2%}")
+st.write(f"🟢 **綠色區域比例:** {green_ratio:.2%}")
+st.write(f"⚪ **中性區域比例:** {neutral_ratio:.2%}")
