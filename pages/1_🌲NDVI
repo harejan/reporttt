@@ -1,1 +1,62 @@
 
+roi = ee.Geometry.Polygon([[
+    [120.271797, 22.628386],
+    [120.271797, 22.587659],
+    [120.322437, 22.587659],
+    [120.322437, 22.628386],
+    [120.271797, 22.628386]
+]])
+
+def maskS2clouds(image):
+    qa = image.select('QA60')
+    cloudBitMask = 1 << 10
+    cirrusBitMask = 1 << 11
+    mask = qa.bitwiseAnd(cloudBitMask).eq(0).And(
+           qa.bitwiseAnd(cirrusBitMask).eq(0))
+    return image.updateMask(mask) \
+                .select("B.*") \
+                .copyProperties(image, ["system:time_start"])
+
+def addNDVI(image):
+    ndvi = image.normalizedDifference(['B8', 'B4']).rename('NDVI')
+    return image.addBands(ndvi)
+
+
+s2 = ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
+
+filtered = (s2
+    .filter(ee.Filter.date('2017-01-01', '2017-12-31'))
+    .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
+    .filter(ee.Filter.bounds(roi))
+    .map(maskS2clouds)
+    .map(addNDVI)
+)
+
+median2017 = filtered.median().clip(roi)
+
+
+ndvi_vis = {
+    'min': -0.5,
+    'max': 1.0,
+    'palette':['#640000',  # very low NDVI
+          '#ff0000',  # low NDVI
+          '#ffff00',  # medium NDVI
+          '#00c800',  # high NDVI
+          '#006400']   # very high NDVI
+}
+
+legend_dict = {
+    '-1 ~ -0.6': '#640000',
+    '-0.6 ~ -0.2': '#ff0000',
+    '-0.2 ~ 0.2': '#ffff00',
+    '0.2 ~ 0.6': '#00c800',
+    '0.6 ~ 1': '#006400'
+}
+
+
+
+my_Map = geemap.Map()
+my_Map.centerObject(roi, 14)
+my_Map.addLayer(median2017.select('NDVI'), ndvi_vis, 'NDVI2017')
+my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
+my_Map
