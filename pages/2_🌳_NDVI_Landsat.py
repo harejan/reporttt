@@ -83,6 +83,9 @@ my_Map.split_map(left_layer, right_layer)
 my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
 my_Map.to_streamlit(height=600)
 
+st.subheader("2024年的NDVI指數-2017年的NDVI指數")
+st.subheader("🟥植生減少 🟩植生減少 ⬜不變" )
+
 ndvi_diff = median2024.select('NDVI').subtract(median2010.select('NDVI'))
 
 diff_vis = {
