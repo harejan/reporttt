@@ -121,5 +121,11 @@ diff_vis = {
 
 my_Map = geemap.Map()
 my_Map.centerObject(roi, 14)
+my_Map.add_legend(title='NDVI Difference', legend_dict={
+    '-0.5 ~ -0.2': 'red',
+    '-0.2 ~ 0': 'white',
+    '0 ~ 0.2': 'lightgreen',
+    '0.2 ~ 0.5': 'green'
+})
 my_Map.addLayer(ndvi_diff, diff_vis, 'NDVI Difference (2024 - 2017)')
 my_Map.to_streamlit(height=600)
