@@ -101,8 +101,6 @@ legend_dict = {
     '0.6 ~ 1': '#006400'
 }
 
-
-
 my_Map = geemap.Map()
 left_layer = geemap.ee_tile_layer(median2017.select('NDVI'), ndvi_vis, '2017年')
 right_layer = geemap.ee_tile_layer(median2024.select('NDVI'), ndvi_vis, '2024年')
@@ -110,4 +108,18 @@ right_layer = geemap.ee_tile_layer(median2024.select('NDVI'), ndvi_vis, '2024年
 my_Map.centerObject(median2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
 my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
+my_Map.to_streamlit(height=600)
+
+st.header("📊NDVI比較")
+ndvi_diff = median2024.select('NDVI').subtract(median2017.select('NDVI'))
+
+diff_vis = {
+    'min': -0.5,
+    'max': 0.5,
+    'palette': ['red', 'white', 'green']
+}
+
+my_Map = geemap.Map()
+my_Map.centerObject(roi, 14)
+my_Map.addLayer(ndvi_diff, diff_vis, 'NDVI Difference (2024 - 2017)')
 my_Map.to_streamlit(height=600)
