@@ -111,7 +111,7 @@ my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
 my_Map.to_streamlit(height=600)
 
 st.header("📊NDVI比較")
-st.header("🔢2024年的NDVI指數-2017年的NDVI指數")
+st.subheader("🔢2024年的NDVI指數-2017年的NDVI指數")
 ndvi_diff = median2024.select('NDVI').subtract(median2017.select('NDVI'))
 
 diff_vis = {
