@@ -112,7 +112,7 @@ my_Map.to_streamlit(height=600)
 
 st.header("📊NDVI比較")
 st.subheader("2024年的NDVI指數-2017年的NDVI指數")
-st.subheader("🟥植生減少 🟩植生減少 ⬜不變" )
+st.subheader("🟥植生減少 🟩植生增加 ⬜不變" )
 ndvi_diff = median2024.select('NDVI').subtract(median2017.select('NDVI'))
 
 diff_vis = {
