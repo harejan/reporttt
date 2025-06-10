@@ -147,7 +147,7 @@ green_ratio = green_count / total_count
 neutral_ratio = neutral_count / total_count
 
 # 在 Streamlit 中顯示結果
-st.subheader("NDVI 差異區域比例統計 (2010 → 2024, Landsat)")
+st.subheader("NDVI 差異區域比例統計")
 st.write(f"🔴 **紅色區域比例:** {red_ratio:.2%}")
 st.write(f"🟢 **綠色區域比例:** {green_ratio:.2%}")
 st.write(f"⚪ **中性區域比例:** {neutral_ratio:.2%}")
