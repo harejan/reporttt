@@ -120,6 +120,7 @@ diff_vis = {
 }
 
 my_Map = geemap.Map()
+my_Map.add_basemap('HYBRID')
 my_Map.centerObject(roi, 14)
 my_Map.add_legend(title='NDVI Difference', legend_dict={
     '-0.5 ~ -0.2': 'red',
