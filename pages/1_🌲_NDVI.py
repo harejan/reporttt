@@ -102,8 +102,8 @@ legend_dict = {
 
 
 my_Map = geemap.Map()
-left_layer = geemap.ee_tile_layer(median2017.select('NDVI', ndvi_vis, '2017年')
-right_layer = geemap.ee_tile_layer(median2024.select('NDVI', ndvi_vis, '2024年')
+left_layer = geemap.ee_tile_layer(median2017.select('NDVI'), ndvi_vis, '2017年')
+right_layer = geemap.ee_tile_layer(median2024.select('NDVI'), ndvi_vis, '2024年')
 
 my_Map.centerObject(median2017.geometry(), 14)
 my_Map.split_map(left_layer, right_layer)
