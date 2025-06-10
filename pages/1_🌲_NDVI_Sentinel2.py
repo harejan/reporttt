@@ -5,7 +5,7 @@ from google.oauth2 import service_account
 import geemap.foliumap as geemap
 
 st.title("🌲2019~2024年NDVI變化")
-st.header("🛰️Sentinel")
+st.header("🛰️Sentinel 2")
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
 
