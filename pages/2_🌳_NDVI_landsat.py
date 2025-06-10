@@ -1,10 +1,11 @@
-st.title("2019~2024年NDVI變化")
-st.header("🛰️landsat")
 import streamlit as st
+from datetime import date
 import ee
 from google.oauth2 import service_account
 import geemap.foliumap as geemap
 
+st.title("2019~2024年NDVI變化")
+st.header("🛰️landsat")
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
 
