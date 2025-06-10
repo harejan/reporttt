@@ -5,7 +5,7 @@ from google.oauth2 import service_account
 import geemap.foliumap as geemap
 
 st.title("2019~2024年NDVI變化")
-st.header("🛰️landsat")
+st.header("🛰️Landsat")
 # 從 Streamlit Secrets 讀取 GEE 服務帳戶金鑰 JSON
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
 
@@ -73,4 +73,5 @@ right_layer = geemap.ee_tile_layer(median2024, ndvi_vis, 'NDVI 2024')
 
 my_Map.centerObject(roi, 14)
 my_Map.split_map(left_layer, right_layer)
+my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
 my_Map.to_streamlit(height=600)
