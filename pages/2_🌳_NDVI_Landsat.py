@@ -82,3 +82,16 @@ my_Map.centerObject(roi, 14)
 my_Map.split_map(left_layer, right_layer)
 my_Map.add_legend(title='NDVI', legend_dict=legend_dict)
 my_Map.to_streamlit(height=600)
+
+ndvi_diff = median2024.select('NDVI').subtract(median2010.select('NDVI'))
+
+diff_vis = {
+    'min': -0.5,
+    'max': 0.5,
+    'palette': ['red', 'white', 'green']
+}
+
+my_Map = geemap.Map()
+my_Map.centerObject(roi, 14)
+my_Map.addLayer(ndvi_diff, diff_vis, 'NDVI Difference (2024 - 2010)')
+my_Map.to_streamlit(height=600)
